@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -8,7 +9,8 @@
     "lib": ["es6"],
     "moduleResolution": "node",
     "target": "esnext",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": "./"
   },
 
   "include": ["src"],
