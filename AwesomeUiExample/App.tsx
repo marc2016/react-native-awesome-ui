@@ -26,7 +26,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {AwesomeHeader} from 'react-native-awesome-ui';
+import {AwesomeHeader, AwesomeDotButton} from 'react-native-awesome-ui';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -35,43 +35,36 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <AwesomeHeader subtitle="TEST" />
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change
-                this screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
+          <AwesomeHeader
+            subtitle="Ihre Dokumente auf einen Blick"
+            title="Postkorb"
+            iconId="mail-bulk"
+            iconColor="white"
+            backgroundColor="#2D91E8"
+            textColor="white"
+          />
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginTop: 20,
+            }}>
+            <AwesomeDotButton
+              dotColor="#2D91E8"
+              iconId="mail-bulk"
+              iconColor="white"
+              title="Krankenschein hochladen"
+            />
+            <AwesomeDotButton
+              dotColor="#2D91E8"
+              iconId="user-tie"
+              iconColor="white"
+              title="Kontakt"
+            />
           </View>
         </ScrollView>
       </SafeAreaView>
