@@ -1,1 +1,2 @@
-export { AwesomeHeader } from './AwesomeHeader'
+export { AwesomeHeader, AwesomeHeaderProps } from './AwesomeHeader'
+export { AwesomeDotButton, AwesomeDotButtonProps } from './AwesomDotButton'
