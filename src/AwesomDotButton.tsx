@@ -80,8 +80,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     flexWrap: 'nowrap',
-    marginStart: -20,
-    marginEnd: -20,
     fontFamily:
       Platform.OS === 'ios' ? 'AppleSDGothicNeo-Thin' : 'sans-serif-thin',
   },
