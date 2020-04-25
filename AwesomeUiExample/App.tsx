@@ -16,6 +16,7 @@ import {
   View,
   Text,
   StatusBar,
+  Button,
 } from 'react-native';
 
 import {
@@ -26,7 +27,11 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {AwesomeHeader, AwesomeDotButton} from 'react-native-awesome-ui';
+import {
+  AwesomeHeader,
+  AwesomeDotButton,
+  AwesomeButton,
+} from 'react-native-awesome-ui';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -64,6 +69,25 @@ const App = () => {
               iconId="user-tie"
               iconColor="white"
               title="Kontakt"
+            />
+          </View>
+          <View style={{marginHorizontal: 20, justifyContent: 'space-between'}}>
+            <AwesomeButton
+              style={{marginBottom: 20, marginTop: 20, width: 'auto'}}
+              buttonColor="#2D91E8"
+              dotColor="#B8B8B8"
+              iconId="chevron-right"
+              iconColor="white"
+              textColor="white"
+              title="Next"
+            />
+            <AwesomeButton
+              buttonColor="#2D91E8"
+              dotColor="#B8B8B8"
+              iconId="trash-alt"
+              iconColor="white"
+              textColor="white"
+              title="Delete"
             />
           </View>
         </ScrollView>
