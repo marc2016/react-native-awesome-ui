@@ -44,8 +44,8 @@ const App = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
           <AwesomeHeader
-            subtitle="Ihre Dokumente auf einen Blick"
-            title="Postkorb"
+            subtitle="Your messages in one view"
+            title="Mailbox"
             iconId="mail-bulk"
             iconColor="white"
             backgroundColor="#2D91E8"
@@ -62,13 +62,13 @@ const App = () => {
               dotColor="#2D91E8"
               iconId="mail-bulk"
               iconColor="white"
-              title="Krankenschein hochladen"
+              title="Mailbox"
             />
             <AwesomeDotButton
               dotColor="#2D91E8"
               iconId="user-tie"
               iconColor="white"
-              title="Kontakt"
+              title="Contact"
             />
           </View>
           <View style={{marginHorizontal: 20, justifyContent: 'space-between'}}>
