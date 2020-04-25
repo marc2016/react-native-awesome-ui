@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     flexGrow: 1,
 
-    fontSize: 33,
+    fontSize: 30,
 
     fontFamily:
       Platform.OS === 'ios' ? 'AppleSDGothicNeo-Thin' : 'sans-serif-thin',
