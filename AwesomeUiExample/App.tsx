@@ -31,6 +31,7 @@ import {
   AwesomeHeader,
   AwesomeDotButton,
   AwesomeButton,
+  AwesomeCard,
 } from 'react-native-awesome-ui';
 
 declare const global: {HermesInternal: null | {}};
@@ -90,6 +91,32 @@ const App = () => {
               title="Delete"
             />
           </View>
+          <AwesomeCard
+            iconId="envelope"
+            iconColor="white"
+            textColor="white"
+            cardColor="#2D91E8"
+            buttons={[
+              {
+                iconId: 'trash-alt',
+                onPress: () => {
+                  console.log('Test');
+                },
+              },
+              {
+                iconId: 'arrow-circle-right',
+                onPress: () => {
+                  console.log('Test');
+                },
+              },
+            ]}
+            style={{margin: 20}}>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet.
+          </AwesomeCard>
         </ScrollView>
       </SafeAreaView>
     </>
