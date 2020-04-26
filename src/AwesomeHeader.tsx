@@ -1,12 +1,13 @@
 import { View, Text, StyleSheet, Platform } from 'react-native'
 import React from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import LinearGradient from 'react-native-linear-gradient'
 
 interface AwesomeHeaderProps {
   iconId: string
   title: string
   subtitle?: string
-  backgroundColor: string
+  backgroundColors: string[]
   textColor: string
   iconColor: string
 }
@@ -18,12 +19,15 @@ const AwesomeHeader = (props: AwesomeHeaderProps) => {
     iconId,
     title,
     textColor,
-    backgroundColor,
+    backgroundColors,
   } = props
+
+  if (backgroundColors.length === 1) {
+    backgroundColors.push(backgroundColors[0])
+  }
+
   return (
-    <View
-      style={[styles.headerContainer, { backgroundColor: backgroundColor }]}
-    >
+    <LinearGradient colors={backgroundColors} style={[styles.headerContainer]}>
       <View style={styles.textContainer}>
         <Text style={[styles.title, { color: textColor }]}>{title}</Text>
         {subtitle && (
@@ -35,7 +39,7 @@ const AwesomeHeader = (props: AwesomeHeaderProps) => {
       <View style={styles.iconContainer}>
         <FontAwesome5 name={iconId} size={40} color={iconColor} solid />
       </View>
-    </View>
+    </LinearGradient>
   )
 }
 

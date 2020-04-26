@@ -10,11 +10,12 @@ import {
 } from 'react-native'
 import React from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import LinearGradient from 'react-native-linear-gradient'
 
 interface AwesomeDotButtonProps {
   iconId: string
   title?: string
-  dotColor: string
+  dotColors: string[]
   textColor?: string
   iconColor: string
   size?: number
@@ -28,7 +29,7 @@ const AwesomeDotButton = (props: AwesomeDotButtonProps) => {
     iconId,
     title,
     textColor,
-    dotColor,
+    dotColors,
     size,
     onPress,
     width,
@@ -39,7 +40,7 @@ const AwesomeDotButton = (props: AwesomeDotButtonProps) => {
 
   const dotButtonStyle = [
     styles.dotButton,
-    { backgroundColor: dotColor, height: dotSize, width: dotSize },
+    { height: dotSize, width: dotSize },
   ] as StyleProp<ViewStyle>
 
   const buttonContainerStyle = [
@@ -52,12 +53,16 @@ const AwesomeDotButton = (props: AwesomeDotButtonProps) => {
     { color: textColor, fontSize: 18, marginHorizontal: (dotSize / 2) * -1 },
   ] as StyleProp<TextStyle>
 
+  if (dotColors.length === 1) {
+    dotColors.push(dotColors[0])
+  }
+
   return (
     <View style={buttonContainerStyle}>
       <TouchableOpacity onPress={onPress}>
-        <View style={dotButtonStyle}>
+        <LinearGradient colors={dotColors} style={dotButtonStyle}>
           <FontAwesome5 name={iconId} size={newSize} color={iconColor} solid />
-        </View>
+        </LinearGradient>
         <Text style={titleStyle}>{title}</Text>
       </TouchableOpacity>
     </View>

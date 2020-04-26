@@ -49,7 +49,7 @@ const App = () => {
             title="Mailbox"
             iconId="mail-bulk"
             iconColor="white"
-            backgroundColor="#2D91E8"
+            backgroundColors={['#2D91E8', '#39648a']}
             textColor="white"
           />
           <View
@@ -60,13 +60,13 @@ const App = () => {
               marginTop: 20,
             }}>
             <AwesomeDotButton
-              dotColor="#2D91E8"
+              dotColors={['#2D91E8', '#39648a']}
               iconId="mail-bulk"
               iconColor="white"
               title="Mailbox"
             />
             <AwesomeDotButton
-              dotColor="#2D91E8"
+              dotColors={['#2D91E8', '#39648a']}
               iconId="user-tie"
               iconColor="white"
               title="Contact"
@@ -95,7 +95,7 @@ const App = () => {
             iconId="envelope"
             iconColor="white"
             textColor="white"
-            cardColors={['#2D91E8', '#4378a6']}
+            cardColors={['#2D91E8', '#39648a']}
             buttonDirection="column"
             buttons={[
               {
