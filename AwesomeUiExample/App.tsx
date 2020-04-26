@@ -95,7 +95,7 @@ const App = () => {
             iconId="envelope"
             iconColor="white"
             textColor="white"
-            cardColor="#2D91E8"
+            cardColors={['#2D91E8', '#4378a6']}
             buttonDirection="column"
             buttons={[
               {

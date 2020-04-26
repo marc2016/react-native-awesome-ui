@@ -11,13 +11,14 @@ import {
 } from 'react-native'
 import React, { Children } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import LinearGradient from 'react-native-linear-gradient'
 
 type ButtonDirection = 'row' | 'column'
 
 interface AwesomeCardProps {
   iconId: string
   title?: string
-  cardColor: string
+  cardColors: string[]
   textColor?: string
   iconColor: string
   style?: StyleProp<ViewStyle>
@@ -37,7 +38,7 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     iconId,
     title,
     textColor,
-    cardColor,
+    cardColors,
 
     style,
     children,
@@ -55,11 +56,7 @@ const AwesomeCard = (props: AwesomeCardProps) => {
   ] as StyleProp<TextStyle>
   const textStyle = [styles.text, { color: textColor }] as StyleProp<TextStyle>
 
-  const cardStyle = [
-    style,
-    styles.card,
-    { backgroundColor: cardColor },
-  ] as StyleProp<ViewStyle>
+  const cardStyle = [style, styles.card] as StyleProp<ViewStyle>
 
   const mainContainerStyle = [
     styles.mainContainer,
@@ -90,8 +87,13 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     ] as StyleProp<ViewStyle>
   }
 
+  const cardColorsInternal = cardColors
+  if (cardColorsInternal.length === 1) {
+    cardColorsInternal.push(cardColors[0])
+  }
+
   return (
-    <View style={cardStyle}>
+    <LinearGradient colors={cardColors} style={cardStyle}>
       <View style={styles.headerContainer}>
         <FontAwesome5 name={iconId} size={28} color={iconColor} solid />
         <View style={styles.headerTextContainer}>
@@ -127,7 +129,7 @@ const AwesomeCard = (props: AwesomeCardProps) => {
           })}
         </View>
       </View>
-    </View>
+    </LinearGradient>
   )
 }
 
