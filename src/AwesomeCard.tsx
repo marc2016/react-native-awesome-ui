@@ -12,6 +12,8 @@ import {
 import React, { Children } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
+type ButtonDirection = 'row' | 'column'
+
 interface AwesomeCardProps {
   iconId: string
   title?: string
@@ -21,6 +23,7 @@ interface AwesomeCardProps {
   style?: StyleProp<ViewStyle>
   children?: string
   buttons?: AwesomeCardButton[]
+  buttonDirection?: ButtonDirection
 }
 
 interface AwesomeCardButton {
@@ -39,6 +42,7 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     style,
     children,
     buttons,
+    buttonDirection,
   } = props
 
   const headerTitleStyle = [
@@ -57,6 +61,35 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     { backgroundColor: cardColor },
   ] as StyleProp<ViewStyle>
 
+  const mainContainerStyle = [
+    styles.mainContainer,
+    { flexDirection: buttonDirection === 'row' ? 'column' : 'row' },
+  ] as StyleProp<ViewStyle>
+
+  let buttonContainerStyle = [styles.buttonContainer] as StyleProp<ViewStyle>
+  let buttonStyle = [styles.button] as StyleProp<ViewStyle>
+  let buttonSeperatorStyle = [styles.buttonSeperator] as StyleProp<ViewStyle>
+
+  if (buttonDirection === 'row') {
+    buttonContainerStyle = [
+      styles.buttonContainer,
+      { flexDirection: 'row' },
+    ] as StyleProp<ViewStyle>
+    buttonSeperatorStyle = [
+      styles.buttonSeperator,
+      { borderLeftWidth: 1, borderLeftColor: 'white' },
+    ] as StyleProp<ViewStyle>
+  } else {
+    buttonContainerStyle = [
+      styles.buttonContainer,
+      { flexDirection: 'column' },
+    ] as StyleProp<ViewStyle>
+    buttonSeperatorStyle = [
+      styles.buttonSeperator,
+      { borderBottomWidth: 1, borderBottomColor: 'white' },
+    ] as StyleProp<ViewStyle>
+  }
+
   return (
     <View style={cardStyle}>
       <View style={styles.headerContainer}>
@@ -66,20 +99,22 @@ const AwesomeCard = (props: AwesomeCardProps) => {
           {/* <Text style={headerSubtitleStyle}>TEST</Text> */}
         </View>
       </View>
-      <View style={styles.mainContainer}>
+      <View style={mainContainerStyle}>
         <View style={styles.textContainer}>
           <Text style={textStyle}>{children}</Text>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={buttonContainerStyle}>
           {buttons?.map((value, index) => {
             return (
-              <View>
+              <View
+                style={{
+                  flexDirection: buttonDirection === 'row' ? 'row' : 'column',
+                }}
+              >
                 {buttons.length > 1 && index !== 0 && (
-                  <View
-                    style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}
-                  ></View>
+                  <View style={buttonSeperatorStyle}></View>
                 )}
-                <TouchableOpacity style={styles.button} onPress={value.onPress}>
+                <TouchableOpacity style={buttonStyle} onPress={value.onPress}>
                   <FontAwesome5
                     name={value.iconId}
                     size={25}
@@ -105,8 +140,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginLeft: 8,
   },
+  buttonSeperator: {},
   button: {
-    borderTopColor: 'white',
     paddingTop: 8,
     paddingBottom: 8,
     paddingRight: 10,
@@ -147,4 +182,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export { AwesomeCard, AwesomeCardProps }
+export { AwesomeCard, AwesomeCardProps, ButtonDirection }

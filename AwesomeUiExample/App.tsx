@@ -96,6 +96,7 @@ const App = () => {
             iconColor="white"
             textColor="white"
             cardColor="#2D91E8"
+            buttonDirection="column"
             buttons={[
               {
                 iconId: 'trash-alt',
