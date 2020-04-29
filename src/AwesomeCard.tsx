@@ -25,6 +25,7 @@ interface AwesomeCardProps {
   children?: string
   buttons?: AwesomeCardButton[]
   buttonDirection?: ButtonDirection
+  outlineOnly?: boolean
 }
 
 interface AwesomeCardButton {
@@ -40,6 +41,7 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     textColor,
     cardColors,
 
+    outlineOnly,
     style,
     children,
     buttons,
@@ -50,13 +52,20 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     styles.headerTitle,
     { color: textColor },
   ] as StyleProp<TextStyle>
-  const headerSubtitleStyle = [
-    styles.headerSubtitle,
-    { color: textColor },
-  ] as StyleProp<TextStyle>
+
+  const headerContainerStyle = [
+    styles.headerContainer,
+    { borderBottomColor: outlineOnly ? cardColors[0] : 'white' },
+  ] as StyleProp<ViewStyle>
+
   const textStyle = [styles.text, { color: textColor }] as StyleProp<TextStyle>
 
   const cardStyle = [style, styles.card] as StyleProp<ViewStyle>
+  const cardOutlineStyle = [
+    style,
+    styles.cardOutline,
+    { borderWidth: 1, borderColor: cardColors[0] },
+  ] as StyleProp<ViewStyle>
 
   const mainContainerStyle = [
     styles.mainContainer,
@@ -74,7 +83,10 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     ] as StyleProp<ViewStyle>
     buttonSeperatorStyle = [
       styles.buttonSeperator,
-      { borderLeftWidth: 1, borderLeftColor: 'white' },
+      {
+        borderLeftWidth: 1,
+        borderLeftColor: outlineOnly ? cardColors[0] : 'white',
+      },
     ] as StyleProp<ViewStyle>
   } else {
     buttonContainerStyle = [
@@ -83,7 +95,10 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     ] as StyleProp<ViewStyle>
     buttonSeperatorStyle = [
       styles.buttonSeperator,
-      { borderBottomWidth: 1, borderBottomColor: 'white' },
+      {
+        borderBottomWidth: 1,
+        borderBottomColor: outlineOnly ? cardColors[0] : 'white',
+      },
     ] as StyleProp<ViewStyle>
   }
 
@@ -92,50 +107,72 @@ const AwesomeCard = (props: AwesomeCardProps) => {
     cardColorsInternal.push(cardColors[0])
   }
 
+  const contentHeader = (
+    <View style={headerContainerStyle}>
+      <FontAwesome5 name={iconId} size={28} color={iconColor} solid />
+      <View style={styles.headerTextContainer}>
+        <Text style={headerTitleStyle}>{title}</Text>
+      </View>
+    </View>
+  )
+
+  const contentMain = (
+    <View style={mainContainerStyle}>
+      <View style={styles.textContainer}>
+        <Text style={textStyle}>{children}</Text>
+      </View>
+      <View style={buttonContainerStyle}>
+        {buttons?.map((value, index) => {
+          return (
+            <View
+              style={{
+                flexDirection: buttonDirection === 'row' ? 'row' : 'column',
+              }}
+            >
+              {buttons.length > 1 && index !== 0 && (
+                <View style={buttonSeperatorStyle}></View>
+              )}
+              <TouchableOpacity style={buttonStyle} onPress={value.onPress}>
+                <FontAwesome5
+                  name={value.iconId}
+                  size={25}
+                  color={iconColor}
+                  solid
+                />
+              </TouchableOpacity>
+            </View>
+          )
+        })}
+      </View>
+    </View>
+  )
+
   return (
-    <LinearGradient colors={cardColors} style={cardStyle}>
-      <View style={styles.headerContainer}>
-        <FontAwesome5 name={iconId} size={28} color={iconColor} solid />
-        <View style={styles.headerTextContainer}>
-          <Text style={headerTitleStyle}>New documents</Text>
-          {/* <Text style={headerSubtitleStyle}>TEST</Text> */}
+    <View>
+      {outlineOnly ? (
+        <View style={cardOutlineStyle}>
+          {contentHeader}
+          {contentMain}
         </View>
-      </View>
-      <View style={mainContainerStyle}>
-        <View style={styles.textContainer}>
-          <Text style={textStyle}>{children}</Text>
-        </View>
-        <View style={buttonContainerStyle}>
-          {buttons?.map((value, index) => {
-            return (
-              <View
-                style={{
-                  flexDirection: buttonDirection === 'row' ? 'row' : 'column',
-                }}
-              >
-                {buttons.length > 1 && index !== 0 && (
-                  <View style={buttonSeperatorStyle}></View>
-                )}
-                <TouchableOpacity style={buttonStyle} onPress={value.onPress}>
-                  <FontAwesome5
-                    name={value.iconId}
-                    size={25}
-                    color={iconColor}
-                    solid
-                  />
-                </TouchableOpacity>
-              </View>
-            )
-          })}
-        </View>
-      </View>
-    </LinearGradient>
+      ) : (
+        <LinearGradient colors={cardColors} style={cardStyle}>
+          {contentHeader}
+          {contentMain}
+        </LinearGradient>
+      )}
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   card: {
     borderRadius: 20,
+    backgroundColor: 'transparent',
+  },
+  cardOutline: {
+    borderRadius: 20,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
   },
   mainContainer: { flexDirection: 'row' },
   buttonContainer: {
@@ -152,7 +189,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     paddingLeft: 15,
-    marginTop: 10,
+    paddingTop: 10,
+    paddingBottom: 8,
     borderBottomWidth: 1,
     borderBottomColor: 'white',
   },

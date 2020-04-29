@@ -92,6 +92,36 @@ const App = () => {
             />
           </View>
           <AwesomeCard
+            title="New message"
+            outlineOnly
+            iconId="envelope"
+            iconColor="#2D91E8"
+            textColor="#2D91E8"
+            cardColors={['#2D91E8', '#39648a']}
+            buttonDirection="column"
+            buttons={[
+              {
+                iconId: 'trash-alt',
+                onPress: () => {
+                  console.log('Test');
+                },
+              },
+              {
+                iconId: 'arrow-circle-right',
+                onPress: () => {
+                  console.log('Test');
+                },
+              },
+            ]}
+            style={{margin: 20}}>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet.
+          </AwesomeCard>
+          <AwesomeCard
+            title="New message"
             iconId="envelope"
             iconColor="white"
             textColor="white"
