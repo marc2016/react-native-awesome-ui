@@ -10,11 +10,12 @@ import {
 } from 'react-native'
 import React from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import LinearGradient from 'react-native-linear-gradient'
 
 interface AwesomeButtonProps {
   iconId: string
   title?: string
-  buttonColor: string
+  buttonColors: string[]
   dotColor: string
   textColor?: string
   iconColor: string
@@ -28,17 +29,13 @@ const AwesomeButton = (props: AwesomeButtonProps) => {
     iconId,
     title,
     textColor,
-    buttonColor,
+    buttonColors,
     dotColor,
     onPress,
     style,
   } = props
 
-  const buttonContainerStyle = [
-    style,
-    styles.buttonContainer,
-    { backgroundColor: buttonColor },
-  ]
+  const buttonContainerStyle = [style, styles.buttonContainer]
 
   const iconContainerStyle = [
     styles.iconContainer,
@@ -49,18 +46,24 @@ const AwesomeButton = (props: AwesomeButtonProps) => {
     TextStyle
   >
 
+  if (buttonColors.length === 1) {
+    buttonColors.push(buttonColors[0])
+  }
+
   return (
-    <TouchableOpacity style={buttonContainerStyle} onPress={onPress}>
-      <Text style={titleStyle}>{title}</Text>
-      <View style={iconContainerStyle}>
-        <FontAwesome5
-          name={iconId}
-          size={20}
-          color={iconColor}
-          solid
-          style={styles.icon}
-        />
-      </View>
+    <TouchableOpacity onPress={onPress}>
+      <LinearGradient style={buttonContainerStyle} colors={buttonColors}>
+        <Text style={titleStyle}>{title}</Text>
+        <View style={iconContainerStyle}>
+          <FontAwesome5
+            name={iconId}
+            size={20}
+            color={iconColor}
+            solid
+            style={styles.icon}
+          />
+        </View>
+      </LinearGradient>
     </TouchableOpacity>
   )
 }
